@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <h1>Admin</h1>
+  <a routerLink="/home">Home</a>|
+  <a routerLink="/profile">Profile</a>
+
+  <div class="row">
+    <div class="col-4">
+      <ul class="list-group">
+        <li class="list-group-item active">Courses</li>
+        <li class="list-group-item"
+            (click)="selectCourse(course)"
+            *ngFor="let course of courses"
+            [ngClass]="{'active':course.id == selectedCourse.id}" >
+          {{course.title}}
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="col-8">
+      <ul class="list-group">
+        <li class="list-group-item active">
+          Sections
+        </li>
+        <li class="list-group-item">
+          <p>Current Sections For Course </p>
+          <p *ngFor="let section of sections">
+            <a (click)="selectSection(section)">{{section.name}} - {{section.seats}}</a>
+            <button class="btn btn-danger float-right"
+                    (click)="deleteSection(section)">Delete Section</button>
+            <button class="btn btn-warning float-right"
+                    (click)="editSection(section)">Edit Section</button>
+          </p>
+         <!-- <p>Selected Sections : {{selectedSection.name}}</p>-->
+        </li>
+        <li class="list-group-item">
+          <input [(ngModel)]="sectionName"
+                 placeholder="Section Name"
+                 class="form-control">
+        </li>
+        <li class="list-group-item">
+          <input [(ngModel)]="seats"
+                 placeholder="Seats Available"
+                 class="form-control">
+        </li>
+        <li class="list-group-item">
+          <button class="btn btn-block btn-success"
+                  (click)="createSection(sectionName,seats)">Add Section</button>
+        </li>
+        <li class="list-group-item">
+          <button class="btn btn-block btn-secondary"
+                  (click)="updateSection(sectionName,seats)">Update Section</button>
+        </li>
+        <!--<li *ngFor="let section of sections" class="list-group-item">
+          {{section.title}}
+        </li>-->
+      </ul>
+    </div>
+  </div>
+
+</div>

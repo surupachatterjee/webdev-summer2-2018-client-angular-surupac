@@ -18,6 +18,13 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import {FormsModule} from "@angular/forms";
 import {UserServiceClient} from "./services/user.service.client";
+import { SectionListComponent } from './section-list/section-list.component';
+import { AdminComponent } from './admin/admin.component';
+import {SectionServiceClient} from "./services/section.service.client";
+import { TopicPillsComponent } from './topic-pills/topic-pills.component';
+import { WidgetListComponent } from './widget-list/widget-list.component';
+import {TopicServiceClient} from "./services/topic.service.client";
+import {WidgetServiceClient} from "./services/widget.service.client";
 
 
 @NgModule({
@@ -31,7 +38,11 @@ import {UserServiceClient} from "./services/user.service.client";
     LessonTabsComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    SectionListComponent,
+    AdminComponent,
+    TopicPillsComponent,
+    WidgetListComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +54,10 @@ import {UserServiceClient} from "./services/user.service.client";
     CourseServiceClient,
     ModuleServiceClient,
     LessonServiceClient,
-    UserServiceClient
+    UserServiceClient,
+    SectionServiceClient,
+    TopicServiceClient,
+    WidgetServiceClient
   ],
   bootstrap: [AppComponent]
 })
