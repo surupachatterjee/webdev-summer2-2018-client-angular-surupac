@@ -24,6 +24,7 @@ import {SectionServiceClient} from "./services/section.service.client";
 import { TopicPillsComponent } from './topic-pills/topic-pills.component';
 import { WidgetListComponent } from './widget-list/widget-list.component';
 import {TopicServiceClient} from "./services/topic.service.client";
+import {WidgetServiceClient} from "./services/widget.service.client";
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import {TopicServiceClient} from "./services/topic.service.client";
     LessonServiceClient,
     UserServiceClient,
     SectionServiceClient,
-    TopicServiceClient
+    TopicServiceClient,
+    WidgetServiceClient
   ],
   bootstrap: [AppComponent]
 })

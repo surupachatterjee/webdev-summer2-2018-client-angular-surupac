@@ -1,3 +1,34 @@
-<p>
-  widget-list works!
-</p>
+<div *ngFor="let widget of widgets">
+  <div [ngSwitch]="widget.widgetType">
+    <div *ngSwitchCase="'HEADING'">
+      <div [ngSwitch]="widget.size">
+        <h1 *ngSwitchCase="'1'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h1>
+        <h2 *ngSwitchCase="'2'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h2>
+        <h3 *ngSwitchCase="'3'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h3>
+        <h4 *ngSwitchCase="'4'">Heading Widget : <span style="color: orangered;">{{widget.text}}</span></h4>
+
+        <br/>
+      </div>
+    </div>
+    <div *ngSwitchCase="'LINK'">
+      <a href="{{widget.href}}">{{widget.text}}</a>
+      <br/>
+    </div>
+    <div *ngSwitchCase="'IMAGE'">
+      <img src="{{widget.src}}" alt="image" class="shadow rounded card p-2" height="250px" />
+      <br/>
+    </div>
+    <div *ngSwitchCase="'LIST'">
+      <h4>List Widget</h4>
+      <ul class="list-group">
+        <li class="list-group-item bg-light"
+            *ngFor="let item of widget.listItems.split('\n')">
+          {{item}}
+        </li>
+      </ul>
+      <br/>
+    </div>
+
+  </div>
+</div>
+
