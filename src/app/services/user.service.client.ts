@@ -5,6 +5,12 @@ export class UserServiceClient{
 
   USER_URL = "http://localhost:3000/api/user"
 
+  /*findUserById(userId){
+    return fetch("http://localhost:3000/api/user/"+userId)
+      .then(response => response.json());
+
+  }
+*/
   profile(){
     return fetch('http://localhost:3000/api/profile')
       .then(response => response.json());
@@ -20,6 +26,15 @@ export class UserServiceClient{
 
     }).then(response => response.json());
   }
+
+
+  logout() {
+    return fetch('http://localhost:3000/api/logout', {
+      method: 'post',
+      credentials: 'include'
+    });
+  }
+
 
   createUser(username,password)
   {
