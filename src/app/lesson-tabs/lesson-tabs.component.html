@@ -1,3 +1,4 @@
+<div>
 <ul class="nav nav-tabs">
   <li class="nav-item" *ngFor="let lesson of lessons">
     <a class="nav-link active"
@@ -5,3 +6,7 @@
     routerLink="/course/{{courseId}}/module/{{moduleId}}/lesson/{{lesson.id}}">{{lesson.title}}</a>
   </li>
 </ul>
+<div class="mt-2 mb-3 p-2">
+  <app-topic-pills></app-topic-pills>
+</div>
+</div>
