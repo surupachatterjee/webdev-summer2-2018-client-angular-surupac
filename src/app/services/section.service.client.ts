@@ -62,4 +62,12 @@ export class SectionServiceClient{
   }
 
 
+  findEnrolledSectionsForStudent(){
+    return fetch('http://localhost:3000/api/student/section',{
+      credentials: 'include'
+    })
+      .then(response => response.json());
+  }
+
+
 }

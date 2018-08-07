@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserServiceClient} from "../services/user.service.client";
 import {User} from "../models/user.model.client";
 import {Router} from "@angular/router";
+import {SectionServiceClient} from "../services/section.service.client";
 
 @Component({
   selector: 'app-profile',
@@ -11,9 +12,11 @@ import {Router} from "@angular/router";
 export class ProfileComponent implements OnInit {
 
   constructor(private service:UserServiceClient,
-              private router:Router) { }
+              private router:Router,
+              private sectionService :SectionServiceClient) { }
 
-
+  admin = false;
+  loginVal = true;
   user: {};
   updatedUser={};
   userId='';
@@ -25,6 +28,7 @@ export class ProfileComponent implements OnInit {
   email:'';
   phone:'';
   dateOfBirth:Date;
+  sections =[];
 
 
   logout() {
@@ -57,6 +61,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.service.profile()
       .then(user => {
+        if(user.username === 'No session maintained'){
+          this.loginVal =false;
+          this.router.navigate(['[login']);
+        }
+        if(user.username === 'admin'){
+          this.admin = true;
+        }else{
         this.user = user;
         this.userId = user._id;
         this.username = user.username;
@@ -67,7 +78,11 @@ export class ProfileComponent implements OnInit {
         this.role =user.role;
         this.email=user.email;
         this.dateOfBirth =user.dateOfBirth;
-
+        this.sectionService.findEnrolledSectionsForStudent()
+          .then(sections => {
+            this.sections = sections;
+          })
+        }
       } );
   }
 
