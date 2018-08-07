@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     };
     this.service.login(user)
       .then((user) =>{
-      if(user.username != null){
+      if(user.username !== 'No session maintained'){
         console.log(user.username);
         this.router.navigate(['profile']);
       }

@@ -1,3 +1,14 @@
 <div class="container-fluid">
   <h1>Sections for Course: {{courseId}}</h1>
+  <ul class="list-group rounded py-1 my-1" style="width: 36rem">
+    <li class="list-group-item shadow bg-light"
+        *ngFor="let section of sections">
+      <span style="font-size: large; color:dodgerblue;"> </span>
+      {{section.name}}
+      <button class="float-right btn btn-success">Enroll</button>
+      <br> <span style="color: dimgrey; font-style: italic "> Seats Available :  </span>
+      {{section.seats}}
+    </li>
+  </ul>
+
 </div>

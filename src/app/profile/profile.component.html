@@ -8,7 +8,7 @@
       </label>
       <div class="col-sm-10">
         <input id="usernameFld"
-               [(ngModel)]="user.username"
+               [(ngModel)]="username"
                placeholder="alice"
                class="form-control"
                disabled="true"/>
@@ -21,7 +21,7 @@
       </label>
       <div class="col-sm-10">
         <input id="firstNameFld"
-               [(ngModel)]="user.firstName"
+               [(ngModel)]="firstName"
                placeholder="alice"
                class="form-control"/>
       </div>
@@ -34,7 +34,7 @@
       </label>
       <div class="col-sm-10">
         <input id="lastNameFld"
-               [(ngModel)]="user.lastName"
+               [(ngModel)]="lastName"
                placeholder="alice"
                class="form-control"/>
       </div>
@@ -46,7 +46,7 @@
       </label>
       <div class="col-sm-10">
         <input id="phoneFld"
-               [(ngModel)]="user.phone"
+               [(ngModel)]="phone"
                placeholder="(555) 123-7890"
                class="form-control"/>
       </div>
@@ -59,7 +59,7 @@
       </label>
       <div class="col-sm-10">
         <input id="emailFld"
-               [(ngModel)]="user.email"
+               [(ngModel)]="email"
                placeholder="abc@example.com"
                class="form-control"/>
       </div>
@@ -73,7 +73,7 @@
       </label>
       <div class="col-sm-10">
         <select id="roleFld"
-                [(ngModel)]="user.role"
+                [(ngModel)]="role"
                 class="form-control">
           <option value="FACULTY">Faculty</option>
           <option value="STUDENT">Student</option>
@@ -90,7 +90,7 @@
       <div class="col-sm-10">
         <div class='input-group date'>
           <input type='date'
-                 [(ngModel)]="user.dateOfBirth"
+                 [(ngModel)]="dateOfBirth"
                  class="form-control"
                  id='dateFld'/>
           <span class="input-group-addon">
@@ -103,7 +103,9 @@
     <div class="form-group row">
       <label class="col-sm-2 col-form-label"></label>
       <div class="col-sm-10">
-        <button id="updateBtn" class="btn btn-success btn-block">Update</button>
+        <button id="updateBtn"
+                (click)="updateProfile()"
+                class="btn btn-success btn-block">Update</button>
       </div>
     </div>
 

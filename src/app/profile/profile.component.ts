@@ -14,7 +14,17 @@ export class ProfileComponent implements OnInit {
               private router:Router) { }
 
 
-  user: User =new User();
+  user: {};
+  updatedUser={};
+  userId='';
+  username: '';
+  password: '';
+  firstName: '';
+  lastName: '';
+  role:'';
+  email:'';
+  phone:'';
+  dateOfBirth:Date;
 
 
   logout() {
@@ -25,9 +35,41 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  updateProfile(){
+    this.updatedUser={
+      username: this.username,
+    password: this.password,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    role:this.role,
+    email:this.email,
+    phone:this.phone,
+    dateOfBirth:this.dateOfBirth
+
+    };
+    this.service.updateUser(this.userId,this.updatedUser)
+      .then(user =>{
+        this.user =user;
+      } );
+
+  }
+
   ngOnInit() {
     this.service.profile()
-      .then(user => this.user = user );
+      .then(user => {
+        this.user = user;
+        this.userId = user._id;
+        this.username = user.username;
+        this.firstName =user.firstName;
+        this.lastName =user.lastName;
+        this.phone =user.phone;
+        this.password =user.password;
+        this.role =user.role;
+        this.email=user.email;
+        this.dateOfBirth =user.dateOfBirth;
+
+      } );
   }
+
 
 }
