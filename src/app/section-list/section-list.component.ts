@@ -52,6 +52,9 @@ export class SectionListComponent implements OnInit {
           }
 
         })
+    }else{
+      alert("Please Login to Enroll");
+      this.router.navigate(['login']);
     }
   }
 
