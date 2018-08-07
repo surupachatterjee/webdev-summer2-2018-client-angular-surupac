@@ -69,5 +69,12 @@ export class SectionServiceClient{
       .then(response => response.json());
   }
 
+  dropStudentFromSection(sectionId,enrollmentId){
+      return fetch(this.BASE_SECTION_URL + "/" + sectionId + "/enrollment/"+enrollmentId,{
+        method: 'delete',
+        credentials: 'include'
+      });
+  }
+
 
 }

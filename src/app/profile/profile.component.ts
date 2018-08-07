@@ -70,6 +70,30 @@ export class ProfileComponent implements OnInit {
    }
   }
 
+  drop(enrollment){
+      this.sectionService
+        .dropStudentFromSection(enrollment.section._id,enrollment._id)
+        .then(() => {
+            this.sectionService.findEnrolledSectionsForStudent()
+              .then(sections => {
+                this.sections = sections;
+                for (let i = 0; i < this.sections.length; i++) {
+                  this.courseIds.push({
+                    'section': this.sections[i].section.name,
+                    'course': this.sections[i].section.courseId
+                  });
+                }
+                for (let i = 0; i < this.courseIds.length; i++) {
+                  (this.courseService.findCourseById(this.courseIds[i].course)
+                    .then((course) => {
+                      this.coursesEnrolled.push(course);
+                    }));
+                }
+              })
+        })
+  }
+
+
   ngOnInit() {
     this.service.profile()
       .then(user => {
