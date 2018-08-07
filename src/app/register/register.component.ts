@@ -9,20 +9,44 @@ import {UserServiceClient} from "../services/user.service.client";
 })
 export class RegisterComponent implements OnInit {
 
-  username;
-  password;
-  password2;
+  username ='';
+  password='';
+  password2='';
+  user ={};
   constructor(private router:Router,
               private service:UserServiceClient) {
 
   }
 
   register(username, password, password2) {
-    this.service
-      .createUser(username, password)
-      .then(() => {
-      alert("You are registered successfully");
-      this.router.navigate(['profile'])});
+    if(username === ''){
+      alert('Please enter username')
+    }else{
+        this.service.findUserByUsername(username)
+          .then(user =>{
+            if(user !== null){
+              alert("Username Already Taken!!!");
+            }
+            else{
+              if(password === ''){
+                alert('Please enter password');
+              }else{
+                if(password2 === ''){
+                  alert('Please reconfirm password');
+                }else if(password !== password2){
+                  alert("Passwords Don't Match");
+                }else {
+                  this.service
+                    .createUser(username, password)
+                    .then(() => {
+                      alert("You are registered successfully");
+                      this.router.navigate(['profile'])});
+                }
+              }
+            }
+          })
+    }
+
 
 
   }

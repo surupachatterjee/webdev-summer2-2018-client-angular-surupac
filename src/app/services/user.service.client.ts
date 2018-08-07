@@ -49,6 +49,7 @@ export class UserServiceClient{
     return fetch("http://localhost:3000/api/user",{
       body: JSON.stringify(user),
       method:'POST',
+      credentials: 'include',
       headers:{
         'content-type':'application/json'
       }
@@ -65,6 +66,16 @@ export class UserServiceClient{
         'content-type': 'application/json'
       }
     });
+  }
+
+  findUserByUsername(username){
+    return fetch(this.USER_URL +"/"+username,{
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then(response =>response.json());
   }
 
 
