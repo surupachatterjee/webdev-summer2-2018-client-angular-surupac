@@ -3,6 +3,7 @@ import {UserServiceClient} from "../services/user.service.client";
 import {User} from "../models/user.model.client";
 import {Router} from "@angular/router";
 import {SectionServiceClient} from "../services/section.service.client";
+import {CourseServiceClient} from "../services/course.service.client";
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private service:UserServiceClient,
               private router:Router,
+              private courseService:CourseServiceClient,
               private sectionService :SectionServiceClient) { }
 
   admin = false;
@@ -29,7 +31,8 @@ export class ProfileComponent implements OnInit {
   phone:'';
   dateOfBirth:Date;
   sections =[];
-
+  courseIds=[];
+  coursesEnrolled=[];
 
   logout() {
     this.service
@@ -58,6 +61,15 @@ export class ProfileComponent implements OnInit {
 
   }
 
+
+  fetchCourse(courseId){
+   for(let i=0;i<this.coursesEnrolled.length;i++){
+     if(courseId === this.coursesEnrolled[i].id){
+       return (this.coursesEnrolled[i].title)
+     }
+   }
+  }
+
   ngOnInit() {
     this.service.profile()
       .then(user => {
@@ -81,6 +93,18 @@ export class ProfileComponent implements OnInit {
         this.sectionService.findEnrolledSectionsForStudent()
           .then(sections => {
             this.sections = sections;
+            for (let i = 0; i < this.sections.length; i++) {
+              this.courseIds.push({
+                'section': this.sections[i].section.name,
+                'course': this.sections[i].section.courseId
+              });
+            }
+            for (let i = 0; i < this.courseIds.length; i++) {
+              (this.courseService.findCourseById(this.courseIds[i].course)
+                .then((course) => {
+                  this.coursesEnrolled.push(course);
+                }));
+            }
           })
         }
       } );
