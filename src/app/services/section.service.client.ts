@@ -47,4 +47,19 @@ export class SectionServiceClient{
     });
   }
 
+
+  findEnrollmentForStudent(studentId, sectionId) {
+    return fetch('http://localhost:3000/api/student/' + studentId + '/section/' + sectionId)
+      .then(response => response.json());
+  }
+
+
+  enrollStudentInSection(sectionId) {
+    return fetch(this.BASE_SECTION_URL + "/" + sectionId + '/enrollment' , {
+      method: 'post',
+      credentials: 'include'
+    });
+  }
+
+
 }
