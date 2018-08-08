@@ -32,14 +32,14 @@ export class WhiteBoardComponent implements OnInit {
           console.log('logged in as : ', user);
           this.username = user.username;
           if (this.username !== 'No session maintained') {
-            this.loggedIn = true;
+            this.loginVal = true;
           }
           if (this.username === 'admin') {
             this.admin = true;
           }
         }
       );
-  
+
   }
 
 }
