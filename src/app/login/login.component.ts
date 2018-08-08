@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       .then((user) =>{
       console.log("user that came back" + user.username);
       if(user.username === 'Invalid credentials'){
-        alert("Invalid user ");
+        alert("Invalid username or password ");
         this.router.navigate(['login']);
       }
       else if(user.username !== 'No session maintained'){
