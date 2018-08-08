@@ -26,10 +26,11 @@ export class ProfileComponent implements OnInit {
   password: '';
   firstName: '';
   lastName: '';
-  role:'';
+  //role:'';
   email:'';
+  address='';
   phone:'';
-  dateOfBirth:Date;
+  //dateOfBirth:Date;
   sections =[];
   courseIds=[];
   coursesEnrolled=[];
@@ -48,10 +49,11 @@ export class ProfileComponent implements OnInit {
     password: this.password,
     firstName: this.firstName,
     lastName: this.lastName,
-    role:this.role,
+    //role:this.role,
     email:this.email,
     phone:this.phone,
-    dateOfBirth:this.dateOfBirth
+    address:this.address
+    //dateOfBirth:this.dateOfBirth
 
     };
     this.service.updateUser(this.userId,this.updatedUser)
@@ -111,9 +113,10 @@ export class ProfileComponent implements OnInit {
         this.lastName =user.lastName;
         this.phone =user.phone;
         this.password =user.password;
-        this.role =user.role;
+        //this.role =user.role;
         this.email=user.email;
-        this.dateOfBirth =user.dateOfBirth;
+        this.address =user.address;
+        //this.dateOfBirth =user.dateOfBirth;
         this.sectionService.findEnrolledSectionsForStudent()
           .then(sections => {
             this.sections = sections;
