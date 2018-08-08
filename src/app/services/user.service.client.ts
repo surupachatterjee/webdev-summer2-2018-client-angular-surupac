@@ -3,7 +3,8 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class UserServiceClient{
 
-  USER_URL = "http://localhost:3000/api/user"
+  /*USER_URL = "http://localhost:3000/api/user"*/
+  USER_URL = "https://course-mgmt-nodejs-server-stc.herokuapp.com/api/user"
 
   /*findUserById(userId){
     return fetch("http://localhost:3000/api/user/"+userId)
@@ -12,7 +13,7 @@ export class UserServiceClient{
   }
 */
   profile(){
-    return fetch('http://localhost:3000/api/profile',
+    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/profile',
       {
         credentials: 'include', // include, same-origin, *omit
       })
@@ -20,7 +21,7 @@ export class UserServiceClient{
   }
 
   login = (user) => {
-    return fetch("http://localhost:3000/api/login",{
+    return fetch("https://course-mgmt-nodejs-server-stc.herokuapp.com/api/login",{
       method: 'post',
       body: JSON.stringify(user),
       credentials: 'include',
@@ -33,7 +34,7 @@ export class UserServiceClient{
 
 
   logout() {
-    return fetch('http://localhost:3000/api/logout', {
+    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/logout', {
       method: 'post',
       credentials: 'include'
     });
@@ -46,7 +47,7 @@ export class UserServiceClient{
       username : username,
       password: password
     };
-    return fetch("http://localhost:3000/api/user",{
+    return fetch("https://course-mgmt-nodejs-server-stc.herokuapp.com/api/user",{
       body: JSON.stringify(user),
       method:'POST',
       credentials: 'include',
@@ -58,7 +59,7 @@ export class UserServiceClient{
   }
 
   updateUser(userId, user) {
-    return fetch('http://localhost:3000/api/user/' + userId, {
+    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/user/' + userId, {
       method: 'put',
       body: JSON.stringify(user),
       credentials: 'include',

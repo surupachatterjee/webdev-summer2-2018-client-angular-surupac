@@ -1,8 +1,12 @@
 
 export class SectionServiceClient{
 
-  SECTION_URL ="http://localhost:3000/api/course/COURSEID/section";
+  /*SECTION_URL ="http://localhost:3000/api/course/COURSEID/section";
   BASE_SECTION_URL = "http://localhost:3000/api/section";
+*/
+  SECTION_URL ="https://course-mgmt-nodejs-server-stc.herokuapp.com/api/course/COURSEID/section";
+  BASE_SECTION_URL = "https://course-mgmt-nodejs-server-stc.herokuapp.com/api/section";
+
 
   createSection(courseId,name,seats){
     const section={
@@ -48,8 +52,13 @@ export class SectionServiceClient{
   }
 
 
-  findEnrollmentForStudent(studentId, sectionId) {
+  /*findEnrollmentForStudent(studentId, sectionId) {
     return fetch('http://localhost:3000/api/student/' + studentId + '/section/' + sectionId)
+      .then(response => response.json());
+  }*/
+
+  findEnrollmentForStudent(studentId, sectionId) {
+    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/student/' + studentId + '/section/' + sectionId)
       .then(response => response.json());
   }
 
@@ -62,8 +71,15 @@ export class SectionServiceClient{
   }
 
 
-  findEnrolledSectionsForStudent(){
+  /*findEnrolledSectionsForStudent(){
     return fetch('http://localhost:3000/api/student/section',{
+      credentials: 'include'
+    })
+      .then(response => response.json());
+  }*/
+
+  findEnrolledSectionsForStudent(){
+    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/student/section',{
       credentials: 'include'
     })
       .then(response => response.json());

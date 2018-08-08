@@ -1,6 +1,7 @@
 export class TopicServiceClient{
 
-  TOPIC_URL = "http://localhost:8080/api/course/COURSE_ID/module/MODULE_ID/lesson/LESSON_ID/topic";
+  /*TOPIC_URL = "http://localhost:8080/api/course/COURSE_ID/module/MODULE_ID/lesson/LESSON_ID/topic";*/
+  TOPIC_URL = "https://course-management-stc.herokuapp.com/api/course/COURSE_ID/module/MODULE_ID/lesson/LESSON_ID/topic";
 
   findAllTopicsForLesson(courseId,moduleId,lessonId){
     return fetch(this.TOPIC_URL.replace('COURSE_ID',courseId)
