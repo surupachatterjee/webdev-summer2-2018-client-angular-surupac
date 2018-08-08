@@ -34,6 +34,14 @@ export class SectionListComponent implements OnInit {
   }
 
 
+  logout() {
+    this.userService
+      .logout()
+      .then(() =>
+        this.router.navigate(['login']));
+
+  }
+
   enrollStudent(section){
     console.log("inside enrolll" + this.loginVal);
     if(this.loginVal === true){
