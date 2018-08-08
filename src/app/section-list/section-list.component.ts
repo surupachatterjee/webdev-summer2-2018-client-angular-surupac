@@ -20,6 +20,7 @@ export class SectionListComponent implements OnInit {
   admin = false;
   userId;
   course = {};
+  courseTitle='';
   sections =[];
   constructor(private route:ActivatedRoute,
               private router:Router,
@@ -33,7 +34,7 @@ export class SectionListComponent implements OnInit {
     this.courseId = courseId;
     this.courseService.findCourseById(courseId)
       .then(course => {
-        this.course = course;
+        this.courseTitle = course.title;
         this.service.findAllSectionsForCourse(courseId)
           .then(sections => this.sections =sections);
       })
