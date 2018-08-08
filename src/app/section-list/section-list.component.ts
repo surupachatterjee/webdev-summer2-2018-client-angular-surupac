@@ -1,5 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {SectionServiceClient} from "../services/section.service.client";
+import {UserServiceClient} from "../services/user.service.client";
 
 @Component({
   selector: 'app-section-list',
@@ -11,14 +14,65 @@ export class SectionListComponent implements OnInit {
   courseId;
   sectionName='';
   seats='';
-  constructor(private route:ActivatedRoute) {
+  username;
+  loginVal = true;
+  admin = false;
+  userId;
+
+  sections =[];
+  constructor(private route:ActivatedRoute,
+              private router:Router,
+              private service:SectionServiceClient,
+              private userService:UserServiceClient) {
     this.route.params.subscribe(params => this.loadSections(params['courseId']) );
   }
 
   loadSections(courseId){
     this.courseId = courseId;
+    this.service.findAllSectionsForCourse(courseId)
+      .then(sections => this.sections =sections);
   }
+
+
+  enrollStudent(section){
+    console.log("inside enrolll" + this.loginVal);
+    if(this.loginVal === true){
+      this.service.findEnrollmentForStudent(this.userId,section._id)
+        .then(enrollment => {
+          if(section.seats === 0 ){
+            alert("Seats are no longer Available");
+          }else if(enrollment != null){
+            alert("you are already enrolled for this section");
+          }
+          else{
+            this.service.enrollStudentInSection(section._id)
+              .then(() =>{
+              this.router.navigate(['profile']);
+              })
+          }
+
+        })
+    }else{
+      alert("Please Login to Enroll");
+      this.router.navigate(['login']);
+    }
+  }
+
+
+
   ngOnInit() {
+    this.userService.profile()
+      .then(user => {
+        this.username = user.username;
+        this.userId = user._id;
+        if(this.username === 'No session maintained'){
+          this.loginVal = false;
+        }
+        if(this.username === 'admin'){
+          this.admin = true;
+        }
+      }
+      );
   }
 
 }

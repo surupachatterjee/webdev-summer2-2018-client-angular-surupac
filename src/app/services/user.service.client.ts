@@ -12,17 +12,21 @@ export class UserServiceClient{
   }
 */
   profile(){
-    return fetch('http://localhost:3000/api/profile')
+    return fetch('http://localhost:3000/api/profile',
+      {
+        credentials: 'include', // include, same-origin, *omit
+      })
       .then(response => response.json());
   }
 
   login = (user) => {
     return fetch("http://localhost:3000/api/login",{
-      method:'post',
-      headers:{
-        'content-type':'application/json'
-      },
-      body:JSON.stringify(user)
+      method: 'post',
+      body: JSON.stringify(user),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
 
     }).then(response => response.json());
   }
@@ -45,12 +49,36 @@ export class UserServiceClient{
     return fetch("http://localhost:3000/api/user",{
       body: JSON.stringify(user),
       method:'POST',
+      credentials: 'include',
       headers:{
         'content-type':'application/json'
       }
     })
 
   }
+
+  updateUser(userId, user) {
+    return fetch('http://localhost:3000/api/user/' + userId, {
+      method: 'put',
+      body: JSON.stringify(user),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
+  findUserByUsername(username){
+    return fetch(this.USER_URL +"/"+username,{
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then(response =>response.json());
+  }
+
+
 
 
 }

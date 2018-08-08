@@ -1,6 +1,8 @@
-<h2>
-  Course Grid {{courses.length}}
-</h2>
+<div class="container-fluid">
+<h4>
+  <!--Course Grid {{courses.length}}-->
+  Available Courses
+</h4>
 
 <div class="row">
   <div class="col-sm-3" *ngFor = "let course of courses">
@@ -8,11 +10,11 @@
       <div class="card-body">
         <h5 class="card-title">{{course.title}}</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a routerLink="/course/{{course.id}}" class="btn btn-primary">Go somewhere</a>
-        <a routerLink="/course/{{course.id}}/section" class="btn btn-primary">Enroll</a>
+        <a routerLink="/course/{{course.id}}" class="btn btn-secondary my-2 my-sm-0 mr-2">See Course Content</a>
+        <a routerLink="/course/{{course.id}}/section" class="btn btn-success my-2 my-sm-0 mr-2">Enroll</a>
       </div>
     </div>
   </div>
 </div>
 
-
+</div>
