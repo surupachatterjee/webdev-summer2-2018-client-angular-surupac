@@ -62,23 +62,44 @@
   </div>
 </nav>
 
-
-<app-course-grid></app-course-grid>
-<!--a routerLink="/quizzes">Quiz</a-->
-<!--
 <div class="container-fluid">
-  <h1>
-    Welcome to White Board
-  </h1>
+  <!--<h3>Quiz Taker</h3>-->
+  {{quizId}}
+  <h2>
+    {{quiz.title}}
+  </h2>
 
-  <a routerLink="/courses">Course Navigator</a> |
-  <a routerLink="/courses/grid">Course Grid</a> |
-  <a routerLink="/login">Login</a> |
-  <a routerLink="/register">Register</a>|
-  <a routerLink="/admin">Admin</a>|
-  <a routerLink="/profile">Profile</a>
-  <router-outlet></router-outlet>
+  <ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let question of quiz.questions">
+      {{question.title}}
+      <span class="float-right">{{question.points}}</span>
+      <p>{{question.description}}</p>
+      <div [ngSwitch]="question.questionType">
+        <app-essay-question
+          *ngSwitchCase="'ESSAY'"
+          [question]="question">
+        </app-essay-question>
 
- &lt;!&ndash; <app-course-grid></app-course-grid>&ndash;&gt;
+        <app-fill-blanks-question
+          *ngSwitchCase="'FILL_BLANKS'"
+          [question]="question">
+        </app-fill-blanks-question>
+
+        <app-true-false-question
+          *ngSwitchCase="'TRUE_FALSE'"
+          [question]="question">
+        </app-true-false-question>
+
+        <app-multiple-choice-question
+          *ngSwitchCase="'CHOICE'"
+          [question]="question">
+        </app-multiple-choice-question>
+      </div>
+    </li>
+  </ul>
+  <button class="btn btn-success float-right"
+          (click)="submitQuiz(quiz)">Submit</button>
+  <button class="btn btn-danger float-right"
+          (click)="cancelQuiz()">Cancel</button>
 </div>
--->

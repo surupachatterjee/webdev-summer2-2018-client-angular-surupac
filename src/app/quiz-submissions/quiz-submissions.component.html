@@ -16,11 +16,6 @@
            style="color: wheat"
            routerLink="/home">Home</a>
       </li>
-      <!--li class="nav-item">
-        <a class="nav-link"
-           style="color: wheat"
-           routerLink="/profile">Profile</a>
-      </li-->
       <li class="nav-item active disabled" [hidden]=!loginVal>
         <a class="nav-link" routerLink="/profile">Profile</a>
       </li>
@@ -63,22 +58,40 @@
 </nav>
 
 
-<app-course-grid></app-course-grid>
-<!--a routerLink="/quizzes">Quiz</a-->
-<!--
 <div class="container-fluid">
-  <h1>
-    Welcome to White Board
-  </h1>
+  <div class="form-row">
+    <h3 class="col col-sm-9"> Quiz Submissions</h3>
+    <input class="col col-sm-3 float-right"
+           placeholder="search by UserName"
+           [(ngModel)]="search"
+           *ngIf="userRole==='ADMIN'"/>
+  </div>
 
-  <a routerLink="/courses">Course Navigator</a> |
-  <a routerLink="/courses/grid">Course Grid</a> |
-  <a routerLink="/login">Login</a> |
-  <a routerLink="/register">Register</a>|
-  <a routerLink="/admin">Admin</a>|
-  <a routerLink="/profile">Profile</a>
-  <router-outlet></router-outlet>
+  <ul class="list-group rounded ">
+    <li class="list-group-item shadow bg-light">
+      <div class="form-row">
+      <h5 class="float-left col col-sm-3 "> Quiz Title </h5>
+      <h5 class="col col-sm-4">Submission Date</h5>
+      <h5 class="col col-sm-2" *ngIf="userRole==='ADMIN'">Submitted By</h5>
+      <h5 class="col col-sm-1">Grade</h5>
+      <h5 class="col col-sm-2 float-right">Answer Link</h5>
+      </div>
+    </li>
 
- &lt;!&ndash; <app-course-grid></app-course-grid>&ndash;&gt;
+    <div *ngFor="let quizSub of quizSubmissions">
+    <li class="list-group-item shadow bg-light" >
+        <!--*ngIf="quizSub.student.username === search || search === ''"-->
+      <div class="form-row">
+        <span class="float-left col col-sm-3"> {{quizSub.quiz.title}} </span>
+
+        <span class="col col-sm-4">
+            {{quizSub.submissionDate}}</span>
+        <span class="col col-sm-2" *ngIf="userRole==='ADMIN'">{{quizSub.student.username}}</span>
+        <span class="col col-sm-1">{{quizSub.grade}}/{{quizSub.maximum}}</span>
+        <span class=" col col-sm-2 float-right">
+        <a href="/quiz/{{quizId}}/submission/{{quizSub._id}}">View Answers</a></span>
+      </div>
+    </li>
+    </div>
+  </ul>
 </div>
--->

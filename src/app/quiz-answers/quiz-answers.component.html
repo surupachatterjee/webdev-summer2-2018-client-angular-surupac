@@ -16,11 +16,6 @@
            style="color: wheat"
            routerLink="/home">Home</a>
       </li>
-      <!--li class="nav-item">
-        <a class="nav-link"
-           style="color: wheat"
-           routerLink="/profile">Profile</a>
-      </li-->
       <li class="nav-item active disabled" [hidden]=!loginVal>
         <a class="nav-link" routerLink="/profile">Profile</a>
       </li>
@@ -62,23 +57,45 @@
   </div>
 </nav>
 
-
-<app-course-grid></app-course-grid>
-<!--a routerLink="/quizzes">Quiz</a-->
-<!--
+<br/>
 <div class="container-fluid">
-  <h1>
-    Welcome to White Board
-  </h1>
+  <ul class="list-group">
+    <li class="list-group-item" >
+      <h6> Quiz        : {{quizSubmission.quiz.title}}</h6>
+      <h6 *ngIf="userRole==='ADMIN'"> Submitted By: {{quizSubmission.student.firstName}} {{quizSubmission.student.lastName}} ({{quizSubmission.student.username}})  </h6>
+      <h6> Submitted On: {{quizSubmission.submissionDate}}</h6></li></ul>
+  <ul class="list-group">
+    <li class="list-group-item"
+        *ngFor="let question of quizSubmission.answers">
+      {{question.question.title}}
+      <span class="float-right">{{question.question.points}}</span>
+      <p><span class="float-right">Score: {{question.pointsObtained}}</span></p>
+      <p>{{question.question.description}}</p>
+      <div [ngSwitch]="question.question.questionType">
+        <app-essay-question
+          *ngSwitchCase="'ESSAY'"
+          [question]="question"
+        [flag]=true>
+        </app-essay-question>
 
-  <a routerLink="/courses">Course Navigator</a> |
-  <a routerLink="/courses/grid">Course Grid</a> |
-  <a routerLink="/login">Login</a> |
-  <a routerLink="/register">Register</a>|
-  <a routerLink="/admin">Admin</a>|
-  <a routerLink="/profile">Profile</a>
-  <router-outlet></router-outlet>
+        <app-fill-blanks-question
+          *ngSwitchCase="'FILL_BLANKS'"
+          [question]="question"
+          [flag]=true>
+        </app-fill-blanks-question>
 
- &lt;!&ndash; <app-course-grid></app-course-grid>&ndash;&gt;
+        <app-true-false-question
+          *ngSwitchCase="'TRUE_FALSE'"
+          [question]="question"
+          [flag]=true>
+        </app-true-false-question>
+
+        <app-multiple-choice-question
+          *ngSwitchCase="'CHOICE'"
+          [question]="question"
+          [flag]=true>
+        </app-multiple-choice-question>
+      </div>
+    </li>
+  </ul>
 </div>
--->
