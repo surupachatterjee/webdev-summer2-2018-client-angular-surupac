@@ -1,0 +1,31 @@
+<ul class="list-group" *ngIf="!disableFlag">
+  <li *ngFor="let choice of question.choices"
+    class="list-group-item">
+    <label>
+      <input
+        (click)="selected(choice)"
+        name="{{question._id}}" type="radio">
+      {{choice.text}}
+    </label>
+  </li>
+</ul>
+<ul class="list-group" *ngIf="disableFlag">
+  <li *ngFor="let choice of question.choices"
+      class="list-group-item">
+    <label *ngIf="question.choices.indexOf(choice)!== question.multipleChoiceAnswer">
+      <input
+        (click)="selected(choice)"
+        disabled={{disableFlag}}
+        name="{{question._id}}" type="radio">
+      {{choice.text}}
+    </label>
+    <label *ngIf="question.choices.indexOf(choice)=== question.multipleChoiceAnswer">
+      <input
+        (click)="selected(choice)"
+        disabled={{disableFlag}}
+        checked="true"
+        name="{{question._id}}" type="radio">
+      {{choice.text}}
+    </label>
+  </li>
+</ul>

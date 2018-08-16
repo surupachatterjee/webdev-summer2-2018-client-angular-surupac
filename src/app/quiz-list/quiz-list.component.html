@@ -63,22 +63,25 @@
 </nav>
 
 
-<app-course-grid></app-course-grid>
-<!--a routerLink="/quizzes">Quiz</a-->
-<!--
 <div class="container-fluid">
-  <h1>
-    Welcome to White Board
-  </h1>
+  <!--<a routerLink="/home">Home</a>-->
+  <h3>Quizzes</h3>
+  <ul class="list-group rounded py-1 my-1" style="width: 36rem">
+    <li class="list-group-item shadow bg-light"
+        *ngFor="let quiz of quizzes">
+      <span style="font-size: large; color:dodgerblue;"> </span>
+      {{quiz.title}}
+      <a class="float-right btn btn-success"
+         href="/quiz/{{quiz._id}}"
+         *ngIf="userRole !== 'ADMIN'"
+              >Take Quiz</a>
+      <a class="float-right btn btn-primary"
+         href="/quiz/{{quiz._id}}/submissions"
+      >View Submission</a>
+    </li>
+  </ul>
 
-  <a routerLink="/courses">Course Navigator</a> |
-  <a routerLink="/courses/grid">Course Grid</a> |
-  <a routerLink="/login">Login</a> |
-  <a routerLink="/register">Register</a>|
-  <a routerLink="/admin">Admin</a>|
-  <a routerLink="/profile">Profile</a>
-  <router-outlet></router-outlet>
 
- &lt;!&ndash; <app-course-grid></app-course-grid>&ndash;&gt;
+  <!--{{username}}-->
+
 </div>
--->

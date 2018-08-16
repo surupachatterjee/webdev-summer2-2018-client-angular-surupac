@@ -3,8 +3,8 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class UserServiceClient{
 
-  /*USER_URL = "http://localhost:3000/api/user"*/
-  USER_URL = "https://course-mgmt-nodejs-server-stc.herokuapp.com/api/user"
+  /*URL = "http://localhost:3000/api"*/
+  URL = "https://course-mgmt-nodejs-server-stc.herokuapp.com/api"
 
   /*findUserById(userId){
     return fetch("http://localhost:3000/api/user/"+userId)
@@ -13,7 +13,7 @@ export class UserServiceClient{
   }
 */
   profile(){
-    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/profile',
+    return fetch(this.URL+'/profile',
       {
         credentials: 'include', // include, same-origin, *omit
       })
@@ -21,7 +21,7 @@ export class UserServiceClient{
   }
 
   login = (user) => {
-    return fetch("https://course-mgmt-nodejs-server-stc.herokuapp.com/api/login",{
+    return fetch(this.URL+"/login",{
       method: 'post',
       body: JSON.stringify(user),
       credentials: 'include',
@@ -34,7 +34,7 @@ export class UserServiceClient{
 
 
   logout() {
-    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/logout', {
+    return fetch(this.URL+'/logout', {
       method: 'post',
       credentials: 'include'
     });
@@ -43,12 +43,13 @@ export class UserServiceClient{
 
   createUser(username,password)
   {
-    const user ={
+    const userToCreate ={
       username : username,
-      password: password
+      password: password,
+      role:'STUDENT'
     };
-    return fetch("https://course-mgmt-nodejs-server-stc.herokuapp.com/api/user",{
-      body: JSON.stringify(user),
+    return fetch(this.URL + "/user",{
+      body: JSON.stringify(userToCreate),
       method:'POST',
       credentials: 'include',
       headers:{
@@ -59,7 +60,7 @@ export class UserServiceClient{
   }
 
   updateUser(userId, user) {
-    return fetch('https://course-mgmt-nodejs-server-stc.herokuapp.com/api/user/' + userId, {
+    return fetch(this.URL+'/user/' + userId, {
       method: 'put',
       body: JSON.stringify(user),
       credentials: 'include',
@@ -70,7 +71,7 @@ export class UserServiceClient{
   }
 
   findUserByUsername(username){
-    return fetch(this.USER_URL +"/"+username,{
+    return fetch(this.URL +"/user/"+username,{
       credentials: 'include',
       headers: {
         'content-type': 'application/json'
