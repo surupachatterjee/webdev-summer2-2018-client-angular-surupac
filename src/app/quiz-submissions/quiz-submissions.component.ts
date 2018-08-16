@@ -18,6 +18,7 @@ export class QuizSubmissionsComponent implements OnInit {
   loginVal = false;
   quizId = '';
   quizSubmissions = [];
+  renderQuizSubmissions = [];
   search;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -32,6 +33,11 @@ export class QuizSubmissionsComponent implements OnInit {
       .then(() =>
         this.router.navigate(['login']));
 
+  }
+
+  updateSubmissions(searchString) {
+    this.quizSubmissions = this.renderQuizSubmissions.filter(
+      subs => subs.student.username.includes(searchString));
   }
 
   ngOnInit() {
@@ -55,15 +61,19 @@ export class QuizSubmissionsComponent implements OnInit {
             console.log("Calling Admin API");
             this.service.getQuizSubmissionsForAllStudent(this.quizId)
               .then(submissions => this.quizSubmissions = submissions);
+            this.service.getQuizSubmissionsForAllStudent(this.quizId)
+              .then(submissions => this.renderQuizSubmissions = submissions);
           }
           else {
             console.log("user role:" + this.userRole);
             this.service.getQuizSubmissionsForStudent(this.quizId)
-              .then(submissions => this.quizSubmissions = submissions);
+              .then(submissions => {
+                this.quizSubmissions = submissions;
+              });
+            this.service.getQuizSubmissionsForAllStudent(this.quizId)
+              .then(submissions => this.renderQuizSubmissions = submissions)
           }
         }
       );
-
-
   }
 }

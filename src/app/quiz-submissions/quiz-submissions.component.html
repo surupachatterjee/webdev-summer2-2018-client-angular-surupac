@@ -63,7 +63,7 @@
     <h3 class="col col-sm-9"> Quiz Submissions</h3>
     <input class="col col-sm-3 float-right"
            placeholder="search by UserName"
-           [(ngModel)]="search"
+           (input)="updateSubmissions($event.target.value)"
            *ngIf="userRole==='ADMIN'"/>
   </div>
 
